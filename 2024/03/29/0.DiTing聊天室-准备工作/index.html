@@ -1,0 +1,212 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>DanMu Space | DanMu Space</title><meta name="author" content="DanMu"><meta name="copyright" content="DanMu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言Hello，我是单木。接下来我将会开启一个新的博客系列，使用 GoLang 从 0 到 1 实现一个IM聊天室项目。 为什么要做这个项目说实话，作为一个Javer，我对于 Go 的了解也还仅限于前两天时间刚刚突击的基本语法，但是没办法，我即将实习的公司采用 Go 作为技术栈，我只能开始转战 Go 的旅程。作为一个 Go 语言的新手，我肯定会遇到各种各样的问题和挑战。正因为如此，我希望通过记录我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DanMu Space">
+<meta property="og:url" content="https://danmuking.github.io/2024/03/29/0.DiTing%E8%81%8A%E5%A4%A9%E5%AE%A4-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/index.html">
+<meta property="og:site_name" content="DanMu Space">
+<meta property="og:description" content="前言Hello，我是单木。接下来我将会开启一个新的博客系列，使用 GoLang 从 0 到 1 实现一个IM聊天室项目。 为什么要做这个项目说实话，作为一个Javer，我对于 Go 的了解也还仅限于前两天时间刚刚突击的基本语法，但是没办法，我即将实习的公司采用 Go 作为技术栈，我只能开始转战 Go 的旅程。作为一个 Go 语言的新手，我肯定会遇到各种各样的问题和挑战。正因为如此，我希望通过记录我">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2024-03-29T06:51:51.933Z">
+<meta property="article:modified_time" content="2024-03-30T13:21:16.523Z">
+<meta property="article:author" content="DanMu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://danmuking.github.io/2024/03/29/0.DiTing%E8%81%8A%E5%A4%A9%E5%AE%A4-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'DanMu Space',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-30 21:21:16'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="DanMu Space"><span class="site-name">DanMu Space</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-03-29T06:51:51.933Z" title="发表于 2024-03-29 14:51:51">2024-03-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-30T13:21:16.523Z" title="更新于 2024-03-30 21:21:16">2024-03-30</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Hello，我是单木。接下来我将会开启一个新的博客系列，使用 GoLang 从 0 到 1 实现一个IM聊天室项目。</p>
+<h3 id="为什么要做这个项目"><a href="#为什么要做这个项目" class="headerlink" title="为什么要做这个项目"></a>为什么要做这个项目</h3><p>说实话，作为一个Javer，我对于 Go 的了解也还仅限于前两天时间刚刚突击的基本语法，但是没办法，我即将实习的公司采用 Go 作为技术栈，我只能开始转战 Go 的旅程。作为一个 Go 语言的新手，我肯定会遇到各种各样的问题和挑战。正因为如此，我希望通过记录我的学习过程和解决问题的方法，能够帮助其他新手更好地理解和应对在学习 Go 语言过程中可能遇到的困难。我希望，通过分享我的经验和教训，我能够为那些正在踏上学习 Go 语言之路的人们提供一些有价值的帮助和指导。废话少说，让我们进入正题。</p>
+<h2 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h2><h3 id="创建一个空白项目"><a href="#创建一个空白项目" class="headerlink" title="创建一个空白项目"></a>创建一个空白项目</h3><p>如果下载安装 Go 和创建一个项目网上已经有许多非常优秀的教程了，这里请允许我偷个懒，如果有需要，这里提供两个连接，请大家自行阅读<a target="_blank" rel="noopener" href="https://www.runoob.com/go/go-environment.html">Go 安装</a>和<a target="_blank" rel="noopener" href="https://www.k8stech.net/go-book/ch2/readme2.html">GoLand 的安装和使用</a><br>接下来我们创建一个全新的项目，这里就叫做DiTing-Go好了，那么现在一个空白的 Go 项目就搭建好了。</p>
+<h3 id="项目的层级"><a href="#项目的层级" class="headerlink" title="项目的层级"></a>项目的层级</h3><p>好了，现在我们先不考虑具体的实现细节，我们先来对项目的功能做一个层次上的划分。首先，每一个 Go 程序都需要有一个main.go作为程序的执行入口。其次，对于一个Web项目来说，任何一个功能都是按照下图中的流程进行的。<br><img src="https://cdn.nlark.com/yuque/0/2024/jpeg/29091075/1711786123703-6b1947fc-fa70-47ac-aa7f-4f5e6c35dab1.jpeg"><br>其中，路由层负责根据用户访问的路径将请求转发给不同的控制器，控制层负责进行简单的逻辑处理，复杂的业务逻辑则应该调用服务层进行处理。模型层则负责和数据库进行交互。因此我们可以同样按照这个顺序来对项目进行划分。同时，在项目中还会存在一些固定的配置以及项目中产生的日志，这两个部分也应当被单独划分。最终项目的层级结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">├── conf                    #项目配置文件目录</span><br><span class="line">│   └── config.yaml         #例如：toml、yaml等等</span><br><span class="line">├── controllers             #控制层目录</span><br><span class="line">├── services                #服务层目录</span><br><span class="line">├── models                  #模型层目录，和数据库表的映射保存在这里</span><br><span class="line">├── routes                  #路由目录，负责分发请求</span><br><span class="line">├── logs                    #日志文件目录，保存项目运行过程中产生的日志。</span><br><span class="line">├── main.go                 #项目入口</span><br><span class="line">├── README.md</span><br><span class="line">├── .gitignore</span><br></pre></td></tr></table></figure>
+
+<h2 id="搭建一个简单的Web"><a href="#搭建一个简单的Web" class="headerlink" title="搭建一个简单的Web"></a>搭建一个简单的Web</h2><p>接下来，我们就可以开始搭建我们的 Web 项目了。现在 Go 的生态中已经存在了大量的 Web 框架可以帮助我们快速的开发，这里简单介绍一下常见的 Web 框架。</p>
+<h3 id="框架选型"><a href="#框架选型" class="headerlink" title="框架选型"></a>框架选型</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>优点</th>
+<th>缺点</th>
+<th>地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>iris</td>
+<td>主要侧重于Web开发，提供了Web开发的一系列功能组件，基于MVC开发模式。iris这一年发展比较快，从一个Web Server的组件，也慢慢朝着beego的设计方向努力。</td>
+<td>号称性能最强，结果平平。非模块化设计。最近两年开始朝beego方向发展，但整体框架能力还不完备，需要加油。</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/kataras/iris">https://github.com/kataras/iris</a></td>
+</tr>
+<tr>
+<td>beego</td>
+<td>开源的比较早，最早的一款功能比较全面的Golang开发框架，一直在Golang领域有着比较大的影响力，作者谢大多年组织着国内影响力比较大GopherCN活动。beego有着比较丰富的开发模块、开箱即用，提供了基于MVC设计模式的项目结构、开发工具链，主要定位为Web开发，当然也可以用于非Web项目开发。</td>
+<td>起步较早，自谢大创业后，近几年发展较慢。非模块化设计，对第三方重量级模块依赖较多。</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/beego/beego">https://github.com/beego/beego</a></td>
+</tr>
+<tr>
+<td>gin</td>
+<td>专注于轻量级的Web Server，比较简单，易于理解，路由和中间件设计不错，可以看做替代标准库net&#x2F;http.Server的路由加强版web server。献给爱造轮子的朋友们。</td>
+<td>功能简单易用，既是优点，也是缺点。</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/gin-gonic/gin">https://github.com/gin-gonic/gin</a></td>
+</tr>
+</tbody></table>
+<p>考虑到文档的完善程度和使用的普遍程度，<strong>DiTing 中将采用 Gin 作为 Web 开发框架。</strong></p>
+<h3 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h3><h4 id="安装-Gin"><a href="#安装-Gin" class="headerlink" title="安装 Gin"></a>安装 Gin</h4><ol>
+<li>初始化 Go项目，我们首先需要再项目根目录中打开cmd，输入以下命令进行项目初始化以及 Gin 的安装</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#初始化项目，别忘了！</span><br><span class="line">go mod init DiTing</span><br><span class="line"></span><br><span class="line">#安装gin框架</span><br><span class="line">go get -u github.com/gin-gonic/gin</span><br></pre></td></tr></table></figure>
+
+<h4 id="搭建一个简单的-Gin-Demo"><a href="#搭建一个简单的-Gin-Demo" class="headerlink" title="搭建一个简单的 Gin Demo"></a>搭建一个简单的 Gin Demo</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意，这里必须是main才能成为项目的入口</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入Gin</span></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;github.com/gin-gonic/gin&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    router := gin.Default()</span><br><span class="line"></span><br><span class="line">    router.GET(<span class="string">&quot;/&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(ctx *gin.Context)</span></span> &#123;</span><br><span class="line">        <span class="comment">// 简单返回一个json</span></span><br><span class="line">        ctx.JSON(<span class="number">200</span>, gin.H&#123;</span><br><span class="line">            <span class="string">&quot;code&quot;</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="string">&quot;msg&quot;</span>:  <span class="string">&quot;ok&quot;</span>,</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 运行端口，访问地址应该是127.0.0.1:5000</span></span><br><span class="line">    err := router.Run(<span class="string">&quot;:5000&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>采用curl命令进行简单的测试，在cmd中输入</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">5000</span></span><br><span class="line"><span class="comment">// 响应 &#123;&quot;code&quot;:0,&quot;msg&quot;:&quot;ok&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>控制台输入对应的日志，Demo搭建成功<br><img src="https://cdn.nlark.com/yuque/0/2024/png/29091075/1711779976508-7255d128-7b10-44a0-b1e1-22953519db93.png#averageHue=%23222121&clientId=u029fd829-f02b-4&from=paste&height=474&id=u9b7ebc4d&originHeight=474&originWidth=1879&originalType=binary&ratio=1&rotation=0&showTitle=false&size=80815&status=done&style=none&taskId=u60e94987-b4f9-40e1-9381-2091c037832&title=&width=1879" alt="image.png"></p>
+<h2 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h2><h3 id="安装-Gin-报错"><a href="#安装-Gin-报错" class="headerlink" title="安装 Gin 报错"></a>安装 Gin 报错</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get -u github.com/gin-gonic/gin</span><br><span class="line"><span class="keyword">go</span>: module github.com/gin-gonic/gin: Get <span class="string">&quot;https://proxy.golang.org/github.com/gin-gonic/gin/@v/list&quot;</span>: dial tcp <span class="number">142.251</span><span class="number">.42</span><span class="number">.241</span>:<span class="number">443</span>: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.</span><br></pre></td></tr></table></figure>
+
+<p>这是因为国内无法访问到国外的仓库，需要将下载地址更换为国内镜像</p>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> env -w GOPROXY=https:<span class="comment">//goproxy.cn</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="点关注，不迷路"><a href="#点关注，不迷路" class="headerlink" title="点关注，不迷路"></a>点关注，不迷路</h2><p>好了，以上就是这篇文章的全部内容了，如果你能看到这里，<strong>非常感谢你的支持！</strong></p>
+<p>如果你觉得这篇文章写的还不错， 求点赞👍 求关注❤️ 求分享👥 对暖男我来说真的 非常有用！！！</p>
+<p>白嫖不好，创作不易，各位的支持和认可，就是我创作的最大动力，我们下篇文章见！</p>
+<p>如果本篇博客有任何错误，请批评指教，不胜感激 ！</p>
+<p>本文的 <a target="_blank" rel="noopener" href="https://github.com/danmuking/DiTing-Go">Github</a>，欢迎各位用Star砸死我。如果想要加入这个项目或者有任何建议，欢迎联系</p>
+<img src="https://cdn.jsdelivr.net/gh/danmuking/image//%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240328230919.jpg" width=50% /></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://danmuking.github.io">DanMu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://danmuking.github.io/2024/03/29/0.DiTing%E8%81%8A%E5%A4%A9%E5%AE%A4-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/">https://danmuking.github.io/2024/03/29/0.DiTing%E8%81%8A%E5%A4%A9%E5%AE%A4-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://danmuking.github.io" target="_blank">DanMu Space</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">DanMu</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9A%E8%BF%99%E4%B8%AA%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.1.</span> <span class="toc-text">为什么要做这个项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text">项目构建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%A9%BA%E7%99%BD%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.1.</span> <span class="toc-text">创建一个空白项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%B1%82%E7%BA%A7"><span class="toc-number">2.2.</span> <span class="toc-text">项目的层级</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Web"><span class="toc-number">3.</span> <span class="toc-text">搭建一个简单的Web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%86%E6%9E%B6%E9%80%89%E5%9E%8B"><span class="toc-number">3.1.</span> <span class="toc-text">框架选型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA"><span class="toc-number">3.2.</span> <span class="toc-text">开始搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Gin"><span class="toc-number">3.2.1.</span> <span class="toc-text">安装 Gin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-Gin-Demo"><span class="toc-number">3.2.2.</span> <span class="toc-text">搭建一个简单的 Gin Demo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">3.2.3.</span> <span class="toc-text">测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95"><span class="toc-number">4.</span> <span class="toc-text">问题记录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Gin-%E6%8A%A5%E9%94%99"><span class="toc-number">4.1.</span> <span class="toc-text">安装 Gin 报错</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">4.1.1.</span> <span class="toc-text">解决方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%82%B9%E5%85%B3%E6%B3%A8%EF%BC%8C%E4%B8%8D%E8%BF%B7%E8%B7%AF"><span class="toc-number">5.</span> <span class="toc-text">点关注，不迷路</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/29/0.DiTing%E8%81%8A%E5%A4%A9%E5%AE%A4-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" title="无题">无题</a><time datetime="2024-03-29T06:51:51.933Z" title="发表于 2024-03-29 14:51:51">2024-03-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By DanMu</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
